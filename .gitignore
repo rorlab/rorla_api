@@ -17,3 +17,4 @@
 erd.dot
 erd.pdf
 .ruby-version
+config/database.yml

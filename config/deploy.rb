@@ -6,11 +6,17 @@ set :user, 'deployer'
 set :repo_url, 'git@github.com:hschoidr/rorla_api.git'
 
 # Default branch is :master
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :branch, 'deploy'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
 set :deploy_to, "/home/#{user}/apps/#{application}"
+
+# no need any more :remote_cache in Capistrano 3
+# set :deploy_via, :remote_cache
+
+set :use_sudo, false
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -32,16 +38,26 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { 
+  path: "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH" 
+}
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :keep_releases, 20
 
-# config/deploy.rb
+# for rbenv setup
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.1.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
+
+# custom recipes
+Dir.glob('config/deploy/recipes/*.rb').each { |recipe| load recipe }
+
+SSHKit.config.command_map[:rake]  = "bundle exec rake" 
+SSHKit.config.command_map[:rails] = "bundle exec rails"
 
 namespace :deploy do
 
@@ -58,9 +74,9 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        execute :rake, 'cache:clear'
+      end
     end
   end
 

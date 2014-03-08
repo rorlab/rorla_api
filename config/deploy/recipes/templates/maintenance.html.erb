@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MediBase</title>
+    <style type="text/css">
+    html, body {
+      background-color: #800000;
+      font-family: Verdana, Helvetica, Arial;
+      font-size: 14px;
+    }
+
+    a {
+      color: #0000FF;
+      img { border: none; }
+    }
+
+    #container {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #FFF;
+      padding: 20px 40px;
+      border: solid 1px black;
+      margin-top: 20px;
+    }
+    #container h1 {
+      color:#800000;
+    }
+    #container .message {
+      width:60%;
+      margin:20px auto 50px;
+      border:1px solid #eaeaea;
+      padding:20px 30px;
+      background-color: #eaeaea;
+    }
+    li {
+      line-height: 250%;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div style="text-align:center;">
+        <h1>MediBase<sup>&reg;</sup> 웹서비스 정비 중입니다.</h1>
+      </div>
+      <hr>
+      <center>
+        <img src="http://www.youknowsuncity.com/wp-content/uploads/2012/01/under_construction.jpg" style="margin-top:20px;" >
+      </center>
+      <div class="message">
+        <ul>
+          <li>작업 내용 : <%= reason ? reason : "서버 점검 중..." %></li>
+          <li>정지 일시 : <%= Time.now %></li>
+          <li><%= deadline ? deadline : "soon" %>에 웹서비스를 재개할 예정입니다. </li>
+        </ul>
+      </div>
+      <hr>
+      <center>
+        <p>Copyright <%= Time.now.year %> MediBase<sup>&reg;</sup>, Powered by ShareMedics<sup>&reg;</sup>. All rights reserved.</p>
+      </center
+    </div>
+  </body>
+</html>
