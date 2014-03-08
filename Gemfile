@@ -53,7 +53,8 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano', :group => :development
+gem 'capistrano', '~> 3.1.0', :group => :development
+gem 'capistrano-rbenv', '~> 2.0'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
