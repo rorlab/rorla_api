@@ -21,7 +21,7 @@ server 'http://192.168.126.139/', user: 'deployer', roles: %w{web app}, my_prope
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
 # set it globally
  set :ssh_options, {
-   keys: %w(/home/rlisowski/.ssh/id_rsa),
+   keys: %w(/home/#{user}/.ssh/id_rsa), 
    forward_agent: true,
    auth_methods: %w(password)
  }

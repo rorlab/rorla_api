@@ -16,10 +16,18 @@ require 'capistrano/deploy'
 #
 # require 'capistrano/rvm'
 # require 'capistrano/chruby'
-# require 'capistrano/bundler'
+
+require 'capistrano/rbenv'
+
+# Require everything (bundler, rails/assets and rails/migrations)
+require 'capistrano/rails'
+
+# Or require just what you need manually:
+# require 'capistrano/bundler' # Rails needs Bundler, right?
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
-require 'capistrano/rbenv'
+
+# Please note that any require should be placed in Capfile, not config/deploy.rb.
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

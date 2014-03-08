@@ -17,6 +17,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
+
+  # Deploy with Capistrano
+  gem 'capistrano',  '~> 3.1.0'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 # Gems for Everyday Rails Testing with RSpec
@@ -51,10 +56,6 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano', '~> 3.1.0', :group => :development
-gem 'capistrano-rbenv', '~> 2.0'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
